@@ -1,5 +1,5 @@
-import '../data/product_list_repository.dart';
 import 'model/product_domain.dart';
+import 'product_list_repository.dart';
 
 class GetProductMapUsecase {
   final ProductListRepository _repository;
@@ -13,8 +13,7 @@ class GetProductMapUsecase {
 
     // вариант 1: такой вариант написал я -> работает, но студия подчеркивает
     // и предлагает оптимизировать до варианта 2
-    return Map.fromIterable(
-        list,
+    return Map.fromIterable(list,
         key: (product) => product.category,
         value: (product) => list
             .where((element) => element.category == product.category)
