@@ -18,40 +18,36 @@ const _mors = 'Морс';
 const _banana = 'Банановый';
 const _wildberry = 'Дикая ягода';
 const _apple = 'Яблочный';
-const _defaultName = 'Йогурт';
 
 class RemoteDataSource {
   List<ProductDto> getProductList() {
-
     List<ProductDto> result = [];
     for (int i = 0; i < 100; i++) {
-      var category = _getRandomCategory();
-      var name = _getRandomProductName(category);
-      result.add(ProductDto(category: category, name: name));
+      final category = _getRandomCategory();
+      final name = _getRandomProductName(category);
+      result.add(ProductDto(category: category.name, name: name));
     }
     return result;
   }
 
-  String _getRandomCategory() {
+  _ProductCategory _getRandomCategory() {
     return _ProductCategory
-        .values[Random().nextInt(_ProductCategory.values.length)].name;
+        .values[Random().nextInt(_ProductCategory.values.length)];
   }
 
-  String _getRandomProductName(String category) {
+  String _getRandomProductName(_ProductCategory category) {
     switch (category) {
-      case _categoryTea:
+      case _ProductCategory.categoryTea:
         return _TeaName.values[Random().nextInt(_TeaName.values.length)].name;
-      case _categoryCoffee:
+      case _ProductCategory.categoryCoffee:
         return _CoffeeName
             .values[Random().nextInt(_CoffeeName.values.length)].name;
-      case _categoryDrinks:
+      case _ProductCategory.categoryDrinks:
         return _DrinkName
             .values[Random().nextInt(_DrinkName.values.length)].name;
-      case _categoryYogurt:
+      case _ProductCategory.categoryYogurt:
         return _YogurtName
             .values[Random().nextInt(_YogurtName.values.length)].name;
-      default:
-        return _defaultName;
     }
   }
 }
