@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:first_dart/presentation/utils.dart';
+
 import 'dto/product_dto.dart';
 
 const _categoryTea = 'Чай';
@@ -21,8 +23,12 @@ const _apple = 'Яблочный';
 const _requiredProductsQuantity = 100;
 
 class RemoteDataSource {
-  List<ProductDto> getProductList() {
-    return List.generate(_requiredProductsQuantity, (_) => _getRandomProduct());
+  Future<List<ProductDto>> getProductList() {
+    logInDebug('Старт запроса в датасорс');
+    return Future.delayed(
+        Duration(seconds: 3),
+        () => List.generate(
+            _requiredProductsQuantity, (_) => _getRandomProduct()));
   }
 
   ProductDto _getRandomProduct() {

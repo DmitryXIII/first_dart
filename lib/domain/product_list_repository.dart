@@ -1,3 +1,5 @@
-abstract class ProductListRepository<T> {
-  List<T> getProductList();
+import 'package:first_dart/data/dto/product_dto.dart';
+
+abstract class ProductListRepository {
+  Future<List<ProductDto>> getProductList();
 }

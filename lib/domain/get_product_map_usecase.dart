@@ -1,3 +1,5 @@
+import 'package:first_dart/presentation/utils.dart';
+
 import 'model/product_domain.dart';
 import 'product_list_repository.dart';
 
@@ -6,20 +8,20 @@ class GetProductMapUsecase {
 
   GetProductMapUsecase(this._repository);
 
-  Map<String, List<ProductDomain>> getProductMap() {
-    var list = _repository
-        .getProductList()
-        .map((product) => ProductDomain(product.category, product.name));
+  Future<Map<String, List<ProductDomain>>> getProductMap() async {
+    logInDebug('Старт запроса в usecase');
 
-    // вариант 1: такой вариант написал я -> работает, но студия подчеркивает
-    // и предлагает оптимизировать до варианта 2
-    return Map.fromIterable(list,
-        key: (product) => product.category,
-        value: (product) => list
+    var productList = (await _repository.getProductList())
+        .map((product) => ProductDomain(product.category, product.name))
+        .toList();
+
+    logInDebug('Финиш запроса в usecase');
+
+    return {
+      for (var product in productList)
+        product.category: productList
             .where((element) => element.category == product.category)
-            .toList());
-
-    // вариант 2: предложенный студией взамен моего
-    // return { for (var e in list) e.category : list.where((element) => element.category == e.category).toList() };
+            .toList()
+    };
   }
 }
