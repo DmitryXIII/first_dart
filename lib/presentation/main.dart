@@ -9,7 +9,7 @@ void main() {
   productsMap.forEach((key, value) {
     print('=== КАТЕГОРИЯ: $key ===');
     productsMap[key]?.forEach((element) {
-      print('продукт: ${element.category}, ${element.name}');
+      print('продукт: ${element.category} - ${element.name}');
     });
   });
 }

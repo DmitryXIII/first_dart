@@ -18,16 +18,17 @@ const _mors = 'Морс';
 const _banana = 'Банановый';
 const _wildberry = 'Дикая ягода';
 const _apple = 'Яблочный';
+const _requiredProductsQuantity = 100;
 
 class RemoteDataSource {
   List<ProductDto> getProductList() {
-    List<ProductDto> result = [];
-    for (int i = 0; i < 100; i++) {
-      final category = _getRandomCategory();
-      final name = _getRandomProductName(category);
-      result.add(ProductDto(category: category.name, name: name));
-    }
-    return result;
+    return List.generate(_requiredProductsQuantity, (_) => _getRandomProduct());
+  }
+
+  ProductDto _getRandomProduct() {
+    final category = _getRandomCategory();
+    final name = _getRandomProductName(category);
+    return ProductDto(category: category.name, name: name);
   }
 
   _ProductCategory _getRandomCategory() {
