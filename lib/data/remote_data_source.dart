@@ -6,6 +6,19 @@ const _categoryTea = 'Чай';
 const _categoryCoffee = 'Кофе';
 const _categoryDrinks = 'Напитки';
 const _categoryYogurt = 'Йогурт';
+const _americano = 'Американо';
+const _latte = 'Латте';
+const _cappuccino = 'Капучино';
+const _black = 'Черный';
+const _red = 'Красный';
+const _green = 'Зеленый';
+const _water = 'Вода';
+const _limonade = 'Лимонад';
+const _mors = 'Морс';
+const _banana = 'Банановый';
+const _wildberry = 'Дикая ягода';
+const _apple = 'Яблочный';
+const _defaultName = 'Йогурт';
 
 class RemoteDataSource {
   List<ProductDto> getProductList() {
@@ -38,7 +51,7 @@ class RemoteDataSource {
         return _YogurtName
             .values[Random().nextInt(_YogurtName.values.length)].name;
       default:
-        return "Unnamed";
+        return _defaultName;
     }
   }
 }
@@ -55,9 +68,9 @@ enum _ProductCategory {
 }
 
 enum _CoffeeName {
-  americano('Американо'),
-  latte('Латте'),
-  cappuccino('Капучино');
+  americano(_americano),
+  latte(_latte),
+  cappuccino(_cappuccino);
 
   final String name;
 
@@ -65,9 +78,9 @@ enum _CoffeeName {
 }
 
 enum _TeaName {
-  black('Черный'),
-  red('Красный'),
-  green('Зеленый');
+  black(_black),
+  red(_red),
+  green(_green);
 
   final String name;
 
@@ -75,9 +88,9 @@ enum _TeaName {
 }
 
 enum _DrinkName {
-  water('Вода'),
-  limonade('Лимонад'),
-  mors('Морс');
+  water(_water),
+  limonade(_limonade),
+  mors(_mors);
 
   final String name;
 
@@ -85,9 +98,9 @@ enum _DrinkName {
 }
 
 enum _YogurtName {
-  banana('Банановый'),
-  wildberry('Дикая ягода'),
-  apple('Яблочный');
+  banana(_banana),
+  wildberry(_wildberry),
+  apple(_apple);
 
   final String name;
 
