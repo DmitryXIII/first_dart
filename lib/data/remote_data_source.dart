@@ -2,6 +2,11 @@ import 'dart:math';
 
 import 'dto/product_dto.dart';
 
+const _categoryTea = 'Чай';
+const _categoryCoffee = 'Кофе';
+const _categoryDrinks = 'Напитки';
+const _categoryYogurt = 'Йогурт';
+
 class RemoteDataSource {
   List<ProductDto> getProductList() {
 
@@ -21,15 +26,15 @@ class RemoteDataSource {
 
   String _getRandomProductName(String category) {
     switch (category) {
-      case _ProductCategoryConst._categoryTea:
+      case _categoryTea:
         return _TeaName.values[Random().nextInt(_TeaName.values.length)].name;
-      case _ProductCategoryConst._categoryCoffee:
+      case _categoryCoffee:
         return _CoffeeName
             .values[Random().nextInt(_CoffeeName.values.length)].name;
-      case _ProductCategoryConst._categoryDrinks:
+      case _categoryDrinks:
         return _DrinkName
             .values[Random().nextInt(_DrinkName.values.length)].name;
-      case _ProductCategoryConst._categoryYogurt:
+      case _categoryYogurt:
         return _YogurtName
             .values[Random().nextInt(_YogurtName.values.length)].name;
       default:
@@ -39,10 +44,10 @@ class RemoteDataSource {
 }
 
 enum _ProductCategory {
-  categoryTea(_ProductCategoryConst._categoryTea),
-  categoryCoffee(_ProductCategoryConst._categoryCoffee),
-  categoryDrinks(_ProductCategoryConst._categoryDrinks),
-  categoryYogurt(_ProductCategoryConst._categoryYogurt);
+  categoryTea(_categoryTea),
+  categoryCoffee(_categoryCoffee),
+  categoryDrinks(_categoryDrinks),
+  categoryYogurt(_categoryYogurt);
 
   final String name;
 
@@ -87,11 +92,4 @@ enum _YogurtName {
   final String name;
 
   const _YogurtName(this.name);
-}
-
-class _ProductCategoryConst {
-  static const _categoryTea = 'Чай';
-  static const _categoryCoffee = 'Кофе';
-  static const _categoryDrinks = 'Напитки';
-  static const _categoryYogurt = 'Йогурт';
 }
