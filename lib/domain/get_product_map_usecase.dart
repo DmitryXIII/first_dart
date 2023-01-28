@@ -1,21 +1,17 @@
-import 'package:first_dart/presentation/utils.dart';
-
+import 'cold_product_list_repository.dart';
+import 'hot_product_list_repository.dart';
 import 'model/product_domain.dart';
-import 'product_list_repository.dart';
 
 class GetProductMapUsecase {
-  final ProductListRepository _repository;
+  final HotProductListRepository _hotRepository;
+  final ColdProductListRepository _coldRepository;
 
-  GetProductMapUsecase(this._repository);
+  GetProductMapUsecase(this._hotRepository, this._coldRepository);
 
   Future<Map<String, List<ProductDomain>>> getProductMap() async {
-    logInDebug('Старт запроса в usecase');
-
-    var productList = (await _repository.getProductList())
-        .map((product) => ProductDomain(product.category, product.name))
-        .toList();
-
-    logInDebug('Финиш запроса в usecase');
+    final hotList = _getHotProducts();
+    final coldList = _getColdProducts();
+    final productList = [...await hotList, ...await coldList];
 
     return {
       for (var product in productList)
@@ -23,5 +19,17 @@ class GetProductMapUsecase {
             .where((element) => element.category == product.category)
             .toList()
     };
+  }
+
+  Future<List<ProductDomain>> _getHotProducts() async {
+    return (await _hotRepository.getHotProductList())
+        .map((product) => ProductDomain(product.category, product.name))
+        .toList();
+  }
+
+  Future<List<ProductDomain>> _getColdProducts() async {
+    return (await _coldRepository.getColdProductList())
+        .map((product) => ProductDomain(product.category, product.name))
+        .toList();
   }
 }

@@ -5,15 +5,12 @@ import 'utils.dart';
 
 void main() async {
   GetProductMapUsecase usecase = FakeDI().provideUsecase();
-    logInDebug('Старт запроса в main()');
-    var productsMap = await usecase.getProductMap();
+  var productsMap = await usecase.getProductMap();
 
-    productsMap.forEach((key, value) {
-      logInDebug('=== КАТЕГОРИЯ: $key ===');
-      productsMap[key]?.forEach((element) {
-        logInDebug('продукт: ${element.category} - ${element.name}');
-      });
+  productsMap.forEach((key, value) {
+    logInDebug('=== КАТЕГОРИЯ: $key ===');
+    productsMap[key]?.forEach((element) {
+      logInDebug('продукт: ${element.category} - ${element.name}');
     });
-
-  logInDebug('Финиш запроса в main()');
+  });
 }
